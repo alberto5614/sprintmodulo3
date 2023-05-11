@@ -1,0 +1,252 @@
+Sprint modulo 3 base de datos
+Integrantes:  Hervin Alberto Pradines Frías, Enmanuel Francisco Pérez García, Johann Mauricio Candia Llanca, Daniela Alejandra Inostroza Ávila.
+
+
+
+
+//creacion de la base y el usuario
+
+create database telovendo;
+use telovendo;
+CREATE USER "administrador2"@"telovendo" IDENTIFIED BY "administrador12345";
+GRANT ALL PRIVILEGES ON *.* TO "administrador2"@"telovendo";
+flush privileges;
+
+//creacion de tabla proveedores
+
+CREATE TABLE proveedores (
+    id_proveedor INT not null PRIMARY KEY auto_increment,
+    nombre_representante VARCHAR(50) NOT NULL,
+    nombre_corporativo VARCHAR(50) NOT NULL,
+    telefono1 VARCHAR(20) NOT NULL,
+    telefono2 VARCHAR(20),
+    nombre_contacto VARCHAR(50),
+    categoria VARCHAR(50) NOT NULL,
+    correo_facturacion VARCHAR(50) NOT NULL
+);
+
+//creacion tabla clientes
+
+CREATE TABLE clientes (
+  id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  apellido VARCHAR(50) NOT NULL,
+  direccion VARCHAR(100) NOT NULL
+);
+
+//creacion tabla producto
+
+use telovendo;
+CREATE TABLE productos (
+    idProducto INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    precio int NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    color VARCHAR(50) NOT NULL,
+    
+);
+
+
+
+
+//ingresar datos a tabla proveedores
+
+INSERT INTO proveedores (nombre_representante, nombre_corporativo, telefono1, telefono2, nombre_contacto, categoria, correo_facturacion)
+VALUES 
+
+('Juan Perez', 'Electronics Corp.', '555-1234', '555-5678', 'Maria', 'Electrónicos', 'juan.perez@electronics.com'),
+('Luisa Martinez', 'Tech Suppliers', '555-7890', '555-2345', 'Pedro', 'Electrónicos', 'luisa.martinez@techsuppliers.com'),
+('Carlos Gonzalez', 'Gadgets Inc.', '555-1111', '555-2222', 'Laura', 'Electrónicos', 'carlos.gonzalez@gadgets.com'),
+('Patricia Sanchez', 'Smart Devices', '555-3333', '555-4444', 'Javier', 'Electrónicos', 'patricia.sanchez@smartdevices.com'),
+('Mario Rodriguez', 'Electronics World', '555-5555', '555-6666', 'Ana', 'Electrónicos', 'mario.rodriguez@electronicsworld.com')
+('Gabriela Torres', 'Smart Innovations', '555-1212', '555-3434', 'Miguel', 'Electrónicos', 'gabriela.torres@smartinnovations.com'),
+('Ricardo Hernandez', 'Tech Emporium', '555-7878', '555-6767', 'Fernanda', 'Electrónicos', 'ricardo.hernandez@techemporium.com'),
+('Mariana Aguilar', 'Digital Solutions', '555-9999', '555-0000', 'Jorge', 'Electrónicos', 'mariana.aguilar@digitalsolutions.com'),
+('Luis Lopez', 'Innovative Devices', '555-2323', '555-5656', 'Ana', 'Electrónicos', 'luis.lopez@innovativedevices.com'),
+('Carmen Garcia', 'Electronics Universe', '555-2323', '555-5656', 'Santiago', 'Electrónicos', 'carmen.garcia@electronicsuniverse.com')
+
+
+//Ingreso de datos a tabla clientes
+
+use telovendo;
+INSERT INTO clientes (nombre, apellido, direccion)
+VALUES
+('Juan', 'Pérez', 'Av. Siempreviva 123'),
+('María', 'García', 'Calle Falsa 321'),
+('Luis', 'Fernández', 'Av. Corrientes 456'),
+('Ana', 'Sánchez', 'Calle Real 789'),
+('Pedro', 'González', 'Av. Libertador 555');
+INSERT INTO clientes (nombre, apellido, direccion)
+VALUES
+('Carla', 'Rodríguez', 'Calle de la Rosa 987'),
+('José', 'Martínez', 'Av. del Sol 111'),
+('Laura', 'Hernández', 'Calle del Sur 222'),
+('Jorge', 'Díaz', 'Av. del Norte 333'),
+('Lucía', 'Torres', 'Calle del Este 444');
+
+//Ingreso datos a tabla productos
+
+use telovendo;
+INSERT INTO productos(nombre, precio, categoria, color)
+VALUES 
+('iPhone 13 Pro', 1200000, 'Electronica', 'Graphite'),
+('Samsung Galaxy S21', 799000, 'Electronica', 'Phantom Gray'),
+('iPad Pro', 1099000, 'Electronica', 'Space Gray'),
+('MacBook Pro', 1999000, 'Electronica', 'Silver'),
+('Sony Bravia TV', 1199000, 'Electronica', 'Black'),
+('Bose QuietComfort headphones', 349000, 'Electronica', 'Silver'),
+('Canon EOS R6 camera', 2499000, 'Electronica', 'Black'),
+('Nest Learning Thermostat', 249000, 'Casa', 'Stainless Steel'),
+('Roomba i7+ robot vacuum', 799000, 'Casa', 'Black'),
+('Weber Genesis II grill', 899000, 'Outdoors', 'Black'),
+('Dyson V15 vacuum', 699000, 'Casa', 'Red'),
+('Fitbit Charge 5', 149000, 'Fitness', 'Black'),
+('Xbox Series X', 499000, 'Electronica', 'Black'),
+('PlayStation 5', 499000, 'Electronica', 'White'),
+('Samsung 65" QLED TV', 1599000, 'Electronica', 'Titan Black');
+
+// creacion tabla productos_proveedor e ingreso de datos
+
+use telovendo;
+CREATE TABLE Productos_Proveedores (
+    idProducto INT,
+    id_proveedor INT,
+    Stock INT,
+    FOREIGN KEY (idProducto) REFERENCES Productos(idProducto),
+    FOREIGN KEY (id_Proveedor) REFERENCES Proveedores(id_proveedor),
+    PRIMARY KEY (idProducto, Id_Proveedor)
+);
+
+INSERT INTO Productos_Proveedores (idProducto, id_proveedor, Stock) VALUES
+    (1, 1, 50),
+    (2, 2, 20),
+    (3, 3, 30),
+    (4, 1, 10),
+    (4, 2, 15),
+    (5, 4, 5),
+    (5, 5, 5),
+    (6, 1, 20),
+    (6, 3, 10),
+    (7, 2, 25),
+    (7, 3, 15),
+    (8, 4, 8),
+    (8, 5, 12),
+    (9, 1, 15),
+    (9, 2, 10),
+    (9, 3, 5),
+    (10, 5, 20);
+
+Desarrollo de preguntas del Sprint del modulo tres de base de datos
+
+- Cuál es la categoría de productos que más se repite.
+
+SELECT Categoria, COUNT(*) AS Cantidad
+FROM Productos
+GROUP BY Categoria
+ORDER BY Cantidad DESC
+LIMIT 1;
+
+Respuesta 
+	
+	Categoria : Electronica
+	Cantidad : 10
+
+
+- Cuáles son los productos con mayor stock
+
+Se realizo una consulta a la tabla stock, para que muestre los 5 productos con mayor stock, y se realizo una consulta
+cruzada para que apartir del id del producto muestre sus nombres en vez de los id del producto
+
+
+use telovendo;
+SELECT p.Nombre, SUM(pp.Stock) as TotalStock 
+FROM Productos p 
+INNER JOIN Productos_Proveedores pp ON p.IdProducto = pp.IdProducto 
+GROUP BY p.Nombre 
+ORDER BY TotalStock DESC 
+LIMIT 5;
+
+Respuesta
+
+		Producto		Cantidad
+	'iPhone 13 Pro'		 	'50'
+	'Canon EOS R6 camera'   	'40'
+	'Roomba i7+ robot vacuum' 	'30'
+	'iPad Pro' 			'30'
+	'Bose QuietComfort headphones'	'30'
+
+
+
+
+- Qué color de producto es más común en nuestra tienda.
+
+Se realiza una consulta a la tabla productos para ver el color con mayor cantidad en la tienda
+
+
+use telovendo;
+SELECT Color, SUM(pp.Stock) AS TotalStock
+FROM Productos p
+INNER JOIN Productos_Proveedores pp ON p.IdProducto = pp.IdProducto
+GROUP BY Color
+ORDER BY TotalStock DESC
+LIMIT 1;
+
+Respuesta
+	
+	Color		Cantidad
+	Black     	100
+
+
+
+- Cual o cuales son los proveedores con menor stock de productos.
+
+Se realiza una consulta para mostrar los proveedores con menor stock de la tienda
+
+use telovendo;
+SELECT p.Id_Proveedor, pr.Nombre_representante, pr.Nombre_corporativo, SUM(p.Stock) AS TotalStock
+FROM Productos_Proveedores p
+INNER JOIN Proveedores pr ON p.Id_Proveedor = pr.Id_Proveedor
+GROUP BY p.Id_Proveedor, pr.Nombre_representante, pr.Nombre_corporativo
+ORDER BY TotalStock ASC;
+
+Id_Proveedor Nombre_representante 	Nombre_corporativo 	TotalStock
+
+4		Patricia Sanchez	Smart Devices		13
+5		Mario Rodriguez		Electronics World	37
+3		Carlos Gonzalez		Gadgets Inc.		60
+2		Luisa Martinez		Tech Suppliers		70
+1		Juan Perez		Electronics Corp.	95
+
+
+
+
+- Cambien la categoría de productos más popular por ‘Electrónica y computación’.
+
+Para poder cambiar el nombre del campo mas usado a "electronica y computacion", se creo una tabla temporal, y al finalizar el cambio se elimina 
+la tabla temporal 
+
+
+use telovendo;
+CREATE TEMPORARY TABLE temp_categorias
+SELECT Categoria, COUNT(*) AS num_categorias
+FROM Productos
+GROUP BY Categoria
+ORDER BY num_categorias DESC
+LIMIT 1;
+
+UPDATE Productos
+SET Categoria = 'Electrónica y computación'
+WHERE Categoria = (SELECT Categoria FROM temp_categorias);
+
+DROP TEMPORARY TABLE temp_categorias;
+
+
+
+
+
+
+
+
+
+
+

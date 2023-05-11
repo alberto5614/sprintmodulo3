@@ -13,7 +13,7 @@ Si tienes GitHub Desktop y/o GitHub puedes clonar el código a tu ordenador loca
 
 ## PREVISUALIZACIÓN DIAGRAMA
 
-![PREVISUALIZACIÓN DIAGRAMA](screenshots/diagrama.png)
+![PREVISUALIZACIÓN DIAGRAMA](screenshots/relacionScripM3.jpg)
 
 ## AUTORES :busts_in_silhouette:
 
